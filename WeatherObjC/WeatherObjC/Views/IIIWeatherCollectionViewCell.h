@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class IIIForecast;
 @interface IIIWeatherCollectionViewCell : UICollectionViewCell
+
+@property (nonatomic, strong) IIIForecast *forecast;
 
 @end
 
