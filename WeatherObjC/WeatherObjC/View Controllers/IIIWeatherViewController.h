@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface IIIWeatherViewController : UIViewController
+@class IIIWeatherController;
+@interface IIIWeatherViewController : UIViewController<UISearchBarDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) IIIWeatherController *weatherController;
 
 @end
 
