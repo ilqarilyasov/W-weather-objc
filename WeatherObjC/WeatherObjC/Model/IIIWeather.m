@@ -10,49 +10,28 @@
 
 @implementation IIIWeather
 
-- (instancetype)initWithCityName:(NSString *)cityName temp:(double)temp
-                         tempMin:(double)tempMin tempMax:(double)tempMax humidity:(double)humidity
-                            icons:(NSMutableArray *)icons descriptions:(NSMutableArray *)descriptions
+- (instancetype)initWithName:(NSString *)name country:(NSString *)country list:(NSArray *)list
 {
     self = [super init];
     
     if (self) {
-        _cityName = cityName;
-        _temp = temp;
-        _tempMin = tempMin;
-        _tempMax = tempMax;
-        _humidity = humidity;
-        _icons = icons;
-        _descriptions = descriptions;
+        _name = name;
+        _country = country;
+        _list = list;
     }
     
-    return  self;
+    return self;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
-    NSString *cityName = dictionary[@"name"];
+    NSDictionary *city = dictionary[@"city"];
+    NSString *name = city[@"name"];
+    NSString *country = city[@"country"];
     
-    NSDictionary *main = dictionary[@"main"];
-    double temp = [main[@"temp"] doubleValue];
-    double tempMin = [main[@"temp_min"] doubleValue];
-    double tempMax = [main[@"temp_max"] doubleValue];
-    double humidity = [main[@"humidity"] doubleValue];
+    NSArray *list = dictionary[@"list"];
     
-    NSArray *weather = dictionary[@"weather"];
-    NSMutableArray *descriptions = [[NSMutableArray alloc] init];
-    NSMutableArray *icons = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *dict in weather) {
-        NSString *main = dict[@"main"];
-        [descriptions addObject: main];
-        
-        NSString *icon = dict[@"icon"];
-        [icons addObject: icon];
-    }
-    
-    self = [self initWithCityName:cityName temp:temp tempMin:tempMin tempMax:tempMax
-                         humidity:humidity icons:icons descriptions:descriptions];
+    self = [self initWithName:name country:country list:list];
     
     return self;
 }
